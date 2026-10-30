@@ -22,6 +22,7 @@ wheels/
 
 # Virtual Environment
 venv/
+.venv312/
 env/
 ENV/
 
@@ -45,6 +46,6 @@ ENV/
 *.log
 
 # Project specific
-screenshots/
+# screenshots/
 results/
 .claude/

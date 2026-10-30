@@ -1,0 +1,84 @@
+C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\src\utils.py:244: LangChainDeprecationWarning: The class `ChatOllama` was deprecated in LangChain 0.3.1 and will be removed in 1.0.0. An updated version of the class exists in the :class:`~langchain-ollama package and should be used instead. To use it run `pip install -U :class:`~langchain-ollama` and import as `from :class:`~langchain_ollama import ChatOllama``.
+  return ChatOllama(
+
+==================================================
+AVALIAÇÃO DE PROMPTS OTIMIZADOS
+==================================================
+
+Provider: ollama
+Modelo Principal: gemma4:e4b
+Modelo de Avaliação: gemma4:e4b
+
+Provider local Ollama selecionado; nenhuma chave de LLM será exigida.
+Criando dataset de avaliação: mba-ia-pull-evaluation-prompt-eval...
+   ✓ Carregados 15 exemplos do arquivo datasets/bug_to_user_story.jsonl
+   ✓ Dataset 'mba-ia-pull-evaluation-prompt-eval' já existe, usando existente
+
+======================================================================
+PROMPTS PARA AVALIAR
+======================================================================
+
+Este script irá puxar prompts do LangSmith Hub.
+Certifique-se de ter feito push dos prompts antes de avaliar:
+  python src/push_prompts.py
+
+
+🔍 Avaliando: setup-handle/bug_to_user_story_v2
+   Puxando prompt do LangSmith Hub: setup-handle/bug_to_user_story_v2
+   ✓ Prompt carregado com sucesso
+   Dataset: 15 exemplos
+   Avaliando exemplos...
+⚠️  Não foi possível extrair JSON da resposta: ...
+⚠️  Não foi possível extrair JSON da resposta: ...
+⚠️  Não foi possível extrair JSON da resposta: ...
+      [1/15] F1:0.00 Clarity:0.00 Precision:0.00
+      [2/15] F1:0.72 Clarity:0.98 Precision:1.00
+      [3/15] F1:0.84 Clarity:0.90 Precision:0.97
+      [4/15] F1:0.51 Clarity:0.95 Precision:0.90
+      [5/15] F1:0.79 Clarity:0.68 Precision:1.00
+      [6/15] F1:0.89 Clarity:0.68 Precision:0.97
+      [7/15] F1:1.00 Clarity:0.95 Precision:1.00
+      [8/15] F1:0.85 Clarity:0.95 Precision:1.00
+      [9/15] F1:0.77 Clarity:0.93 Precision:0.97
+      [10/15] F1:1.00 Clarity:0.95 Precision:0.83
+      [11/15] F1:1.00 Clarity:0.55 Precision:0.67
+      [12/15] F1:0.97 Clarity:0.65 Precision:0.73
+      [13/15] F1:1.00 Clarity:0.65 Precision:0.77
+      [14/15] F1:1.00 Clarity:0.93 Precision:0.77
+      [15/15] F1:1.00 Clarity:0.57 Precision:0.60
+
+==================================================
+Prompt: setup-handle/bug_to_user_story_v2
+==================================================
+
+Métricas Derivadas:
+  - Helpfulness: 0.78 ✗
+  - Correctness: 0.82 ✓
+
+Métricas Base:
+  - F1-Score: 0.82 ✓
+  - Clarity: 0.76 ✗
+  - Precision: 0.81 ✓
+
+--------------------------------------------------
+📊 MÉDIA GERAL: 0.7980
+--------------------------------------------------
+
+❌ STATUS: REPROVADO
+⚠️  Métricas abaixo de 0.8: helpfulness, clarity
+⚠️  Média atual: 0.7980 | Necessário: 0.8000
+
+==================================================
+RESUMO FINAL
+==================================================
+
+Prompts avaliados: 1
+Aprovados: 0
+Reprovados: 1
+
+⚠️  Alguns prompts não atingiram todas as métricas >= 0.8
+
+Próximos passos:
+1. Refatore os prompts com score baixo
+2. Faça push novamente: python src/push_prompts.py
+3. Execute: python src/evaluate.py novamente

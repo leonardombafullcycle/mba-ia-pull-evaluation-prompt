@@ -11,6 +11,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
 
 from utils import validate_prompt_structure
 
+PROMPT_PATH = Path(__file__).parent.parent / "prompts" / "bug_to_user_story_v2.yml"
+
+
 def load_prompts(file_path: str):
     """Carrega prompts do arquivo YAML."""
     with open(file_path, 'r', encoding='utf-8') as f:
@@ -19,27 +22,40 @@ def load_prompts(file_path: str):
 class TestPrompts:
     def test_prompt_has_system_prompt(self):
         """Verifica se o campo 'system_prompt' existe e não está vazio."""
-        pass
+        prompt = load_prompts(PROMPT_PATH)["bug_to_user_story_v2"]
+        assert prompt.get("system_prompt", "").strip()
 
     def test_prompt_has_role_definition(self):
         """Verifica se o prompt define uma persona (ex: "Você é um Product Manager")."""
-        pass
+        prompt = load_prompts(PROMPT_PATH)["bug_to_user_story_v2"]
+        system_prompt = prompt["system_prompt"].lower()
+        assert "product manager" in system_prompt or "business analyst" in system_prompt
 
     def test_prompt_mentions_format(self):
         """Verifica se o prompt exige formato Markdown ou User Story padrão."""
-        pass
+        prompt = load_prompts(PROMPT_PATH)["bug_to_user_story_v2"]
+        system_prompt = prompt["system_prompt"].lower()
+        assert "markdown" in system_prompt
+        assert "como [ator]" in system_prompt
 
     def test_prompt_has_few_shot_examples(self):
         """Verifica se o prompt contém exemplos de entrada/saída (técnica Few-shot)."""
-        pass
+        prompt = load_prompts(PROMPT_PATH)["bug_to_user_story_v2"]
+        system_prompt = prompt["system_prompt"].lower()
+        assert "few-shot" in system_prompt
+        assert "exemplo 1 - entrada" in system_prompt
+        assert "exemplo 1 - saída" in system_prompt
 
     def test_prompt_no_todos(self):
         """Garante que você não esqueceu nenhum `[TODO]` no texto."""
-        pass
+        prompt = load_prompts(PROMPT_PATH)["bug_to_user_story_v2"]
+        prompt_text = yaml.safe_dump(prompt, allow_unicode=True)
+        assert "[todo]" not in prompt_text.lower()
 
     def test_minimum_techniques(self):
         """Verifica (através dos metadados do yaml) se pelo menos 2 técnicas foram listadas."""
-        pass
+        prompt = load_prompts(PROMPT_PATH)["bug_to_user_story_v2"]
+        assert len(prompt.get("techniques_applied", [])) >= 2
 
 if __name__ == "__main__":
     pytest.main([__file__, "-v", "--tb=short"])

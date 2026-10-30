@@ -30,6 +30,10 @@ from utils import check_env_vars, format_score, print_section_header, get_llm as
 from metrics import evaluate_f1_score, evaluate_clarity, evaluate_precision
 
 load_dotenv()
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8")
 
 
 def get_llm():
@@ -277,9 +281,10 @@ def display_results(prompt_name: str, scores: Dict[str, float]) -> bool:
 def main():
     print_section_header("AVALIAÇÃO DE PROMPTS OTIMIZADOS")
 
-    provider = os.getenv("LLM_PROVIDER", "openai")
-    llm_model = os.getenv("LLM_MODEL", "gpt-4o-mini")
-    eval_model = os.getenv("EVAL_MODEL", "gpt-4o")
+    provider = os.getenv("LLM_PROVIDER", "openai").lower()
+    default_model = "gemma4:e4b" if provider in ["ollama", "local"] else "gpt-4o-mini"
+    llm_model = os.getenv("LLM_MODEL") or default_model
+    eval_model = os.getenv("EVAL_MODEL") or llm_model
 
     print(f"Provider: {provider}")
     print(f"Modelo Principal: {llm_model}")
@@ -290,6 +295,11 @@ def main():
         required_vars.append("OPENAI_API_KEY")
     elif provider in ["google", "gemini"]:
         required_vars.append("GOOGLE_API_KEY")
+    elif provider in ["ollama", "local"]:
+        print("Provider local Ollama selecionado; nenhuma chave de LLM será exigida.")
+    else:
+        print(f"❌ Provider não suportado: {provider}")
+        return 1
 
     if not check_env_vars(required_vars):
         return 1

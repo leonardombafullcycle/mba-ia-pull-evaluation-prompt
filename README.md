@@ -92,6 +92,32 @@ from langchain_google_genai import ChatGoogleGenerativeAI  # LLM Gemini
 
 Este desafio não fixa modelos. Nomes e versões mudam com frequência e alguns são descontinuados, então faz parte do desafio consultar a documentação oficial do provedor que você escolher, ver quais modelos estão disponíveis no momento e selecionar os que atendem ao objetivo. Você pode usar o mesmo modelo para responder e para avaliar, ou um modelo mais capaz na avaliação.
 
+## Ollama local (alternativa sem crédito de API)
+
+O projeto também pode usar um modelo local servido pelo Ollama. Essa opção elimina o
+custo das chamadas ao provider de LLM, mas ainda exige `LANGSMITH_API_KEY` para criar
+o dataset, puxar o prompt publicado e registrar as execuções no LangSmith.
+
+Com o Ollama em execução e o modelo disponível:
+
+```powershell
+ollama list
+ollama run gemma4:e4b
+```
+
+Configure o `.env`:
+
+```env
+LLM_PROVIDER=ollama
+OLLAMA_BASE_URL=http://127.0.0.1:11434
+LLM_MODEL=gemma4:e4b
+EVAL_MODEL=gemma4:e4b
+```
+
+Os nomes em `LLM_MODEL` e `EVAL_MODEL` devem corresponder exatamente ao nome exibido
+por `ollama list`. O modelo local será usado para gerar as User Stories e calcular as
+métricas do fluxo. O prompt ainda será publicado e carregado pelo LangSmith.
+
 ## Requisitos
 
 ### 1. Pull do Prompt inicial do LangSmith
@@ -223,17 +249,22 @@ O que já vem pronto (não alterar):
 - src/metrics.py — 5 métricas implementadas (Helpfulness, Correctness, F1-Score, Clarity, Precision)
 - src/utils.py — Funções auxiliares
 - datasets/bug_to_user_story.jsonl — Dataset com 15 bugs (5 simples, 7 médios, 3 complexos)
-- Suporte multi-provider (OpenAI e Gemini)
+- Suporte multi-provider (OpenAI, Gemini e Ollama local)
 
 ## VirtualEnv para Python
 
-Crie e ative um ambiente virtual antes de instalar dependências:
+Use Python 3.12 para este conjunto de dependências. No Windows, crie o ambiente
+virtual `.venv312` e instale as dependências:
 
+```powershell
+py -3.12 -m venv .venv312
+.\.venv312\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
 ```
-python3 -m venv venv
-source venv/bin/activate  # No Windows: venv\Scripts\activate
-pip install -r requirements.txt
-```
+
+No Git Bash, ative o mesmo ambiente com `source .venv312/Scripts/activate`. Verifique
+que `python --version` indica Python 3.12 antes de executar os scripts. O diretório
+`venv` antigo pode ter sido criado com outra versão do Python e não deve ser reutilizado.
 
 ## Ordem de execução
 
@@ -304,3 +335,103 @@ C) Seção "Como Executar":
 - Não altere os datasets de avaliação - apenas os prompts em prompts/bug_to_user_story_v2.yml
 - Itere, itere, itere - é normal precisar de 3-5 iterações para atingir 0.8 em todas as métricas
 - Documente seu processo - a jornada de otimização é tão importante quanto o resultado final
+
+## Técnicas Aplicadas (Fase 2)
+
+O prompt v2 combina três técnicas:
+
+- **Few-shot Learning**: três exemplos completos de entrada e saída demonstram o nível
+  de detalhamento, o formato Markdown e os critérios Given/When/Then esperados.
+- **Role Prompting**: o modelo assume o papel de Product Manager e Business Analyst
+  sênior, alinhando a resposta às necessidades de produto, engenharia e QA.
+- **Skeleton of Thought**: o prompt define uma sequência interna de identificação do
+  ator, funcionalidade, comportamento atual, comportamento esperado e critérios testáveis.
+  O raciocínio interno não deve ser exposto na resposta final.
+
+Também foram incluídas regras para não inventar fatos, explicitar premissas, tratar
+relatos incompletos e separar as instruções do sistema da entrada do usuário.
+
+## Como Executar
+
+No Windows, crie o ambiente virtual e instale as dependências:
+
+```powershell
+py -3.12 -m venv .venv312
+.\.venv312\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+```
+
+No Git Bash, use `source .venv312/Scripts/activate` para ativar o ambiente. Confirme
+`python --version` antes de prosseguir; deve ser Python 3.12.
+
+Copie `.env.example` para `.env` e configure `LANGSMITH_API_KEY`,
+`USERNAME_LANGSMITH_HUB`, `LANGSMITH_PROJECT` e um provider de LLM. Para Gemini,
+preencha `GOOGLE_API_KEY`; para OpenAI, preencha `OPENAI_API_KEY`; para Ollama,
+inicie o serviço local e não é necessária uma chave de LLM. O fluxo ainda precisa da
+chave LangSmith para gerenciar o dataset, acessar o Prompt Hub e registrar tracing.
+
+Execute o fluxo na raiz do repositório:
+
+```powershell
+python src/pull_prompts.py
+python -m pytest tests/test_prompts.py
+python src/push_prompts.py
+python src/evaluate.py
+```
+
+No Git Bash, depois de ativar `.venv312`, os testes podem ser executados sem plugins
+externos do pytest com:
+
+```bash
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 python -m pytest tests/test_prompts.py
+```
+
+Para registrar e exibir a avaliação final no Git Bash:
+
+```bash
+set -o pipefail
+PYTHONUTF8=1 python src/evaluate.py 2>&1 | tee evaluation-final.txt
+```
+
+O script de avaliação usa o dataset fixo de 15 exemplos e considera aprovado somente
+quando cada uma das métricas Helpfulness, Correctness, F1-Score, Clarity e Precision,
+além da média, alcança `0.8` ou mais. Após uma rodada abaixo do limite, ajuste apenas
+`prompts/bug_to_user_story_v2.yml`, publique novamente e repita a avaliação.
+
+## Resultados Finais
+
+Avaliação executada em 27/10/2026 com o modelo local Ollama `gemma4:e4b` e o dataset
+original de 15 exemplos. A terceira iteração atingiu os limites mínimos em todas as
+métricas. O score de v1 não foi registrado nesta execução, por isso permanece indicado
+como indisponível.
+
+| Métrica     | v1           |   v2 |    Meta |
+| ----------- | ------------ | ---: | ------: |
+| Helpfulness | não avaliado | 0.85 | >= 0.80 |
+| Correctness | não avaliado | 0.82 | >= 0.80 |
+| F1-Score    | não avaliado | 0.81 | >= 0.80 |
+| Clarity     | não avaliado | 0.87 | >= 0.80 |
+| Precision   | não avaliado | 0.83 | >= 0.80 |
+
+- Média geral da iteração aprovada: **0.8374**
+- Modelo: **Ollama `gemma4:e4b`** (geração e avaliação)
+- Compartilhamento público do dataset: <https://smith.langchain.com/public/e3162f63-f628-4ba0-8604-cdb50cd79428/d>
+- Projeto LangSmith (pode exigir login): <https://smith.langchain.com/projects/mba-ia-pull-evaluation-prompt>
+- Índice e capturas de evidência: [EVIDENCIAS.md](EVIDENCIAS.md)
+- Log completo da avaliação aprovada: [evaluation-final.txt](evaluation-final.txt)
+
+Histórico das três avaliações locais: a primeira teve média 0.7432; a segunda, 0.7980;
+a terceira atingiu 0.8374 e passou em todas as cinco métricas. Em uma chamada do juiz
+da terceira rodada, a resposta não veio em JSON e os três scores daquele exemplo foram
+registrados como zero; mesmo assim, os scores agregados superaram 0.80. A avaliação foi
+feita com o mesmo modelo local para geração e julgamento; interprete os scores como
+resultados dessa configuração, não como uma medição independente.
+
+## Checklist de Evidências no LangSmith
+
+- [x] Dataset público de avaliação com os 15 exemplos e captura correspondente.
+- [x] Prompt `setup-handle/bug_to_user_story_v2` publicado como público.
+- [x] Execução aprovada com todas as métricas `>= 0.8`.
+- [x] Tracing detalhado de pelo menos três exemplos.
+- [x] URL do projeto LangSmith registrada nesta documentação.
+- [x] Screenshots das métricas e dos traces incluídas em `screenshots/`.

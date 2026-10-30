@@ -173,7 +173,11 @@ def extract_json_from_response(response_text: str) -> Optional[Dict[str, Any]]:
     return None
 
 
-def get_llm(model: Optional[str] = None, temperature: float = 0.0):
+def get_llm(
+    model: Optional[str] = None,
+    temperature: float = 0.0,
+    json_mode: bool = False,
+):
     """
     Retorna uma instância de LLM configurada baseada no provider.
 
@@ -182,13 +186,24 @@ def get_llm(model: Optional[str] = None, temperature: float = 0.0):
         temperature: Temperatura para geração (padrão: 0.0 para determinístico)
 
     Returns:
-        Instância de ChatOpenAI ou ChatGoogleGenerativeAI
+        Instância de um chat model compatível com LangChain.
 
     Raises:
         ValueError: Se provider não for suportado ou API key não configurada
     """
     provider = os.getenv('LLM_PROVIDER', 'openai').lower()
-    model_name = model or os.getenv('LLM_MODEL', 'gpt-4o-mini')
+    provider_default_models = {
+        'openai': 'gpt-4o-mini',
+        'google': 'gemini-2.5-flash',
+        'gemini': 'gemini-2.5-flash',
+        'ollama': 'gemma4:e4b',
+        'local': 'gemma4:e4b',
+    }
+    model_name = (
+        model
+        or os.getenv('LLM_MODEL')
+        or provider_default_models.get(provider, 'gpt-4o-mini')
+    )
 
     if provider == 'openai':
         from langchain_openai import ChatOpenAI
@@ -222,10 +237,21 @@ def get_llm(model: Optional[str] = None, temperature: float = 0.0):
             google_api_key=api_key
         )
 
+    elif provider in {'ollama', 'local'}:
+        from langchain_community.chat_models import ChatOllama
+
+        base_url = os.getenv('OLLAMA_BASE_URL', 'http://127.0.0.1:11434')
+        return ChatOllama(
+            model=model_name,
+            base_url=base_url,
+            temperature=temperature,
+            format="json" if json_mode else None,
+        )
+
     else:
         raise ValueError(
             f"Provider '{provider}' não suportado.\n"
-            f"Use 'openai' ou 'google' na variável LLM_PROVIDER do .env"
+            f"Use 'openai', 'google' ou 'ollama' na variável LLM_PROVIDER do .env"
         )
 
 
@@ -239,5 +265,10 @@ def get_eval_llm(temperature: float = 0.0):
     Returns:
         Instância de LLM configurada para avaliação
     """
-    eval_model = os.getenv('EVAL_MODEL', 'gpt-4o')
-    return get_llm(model=eval_model, temperature=temperature)
+    eval_model = os.getenv('EVAL_MODEL') or os.getenv('LLM_MODEL')
+    provider = os.getenv('LLM_PROVIDER', 'openai').lower()
+    return get_llm(
+        model=eval_model,
+        temperature=temperature,
+        json_mode=provider in {'ollama', 'local'},
+    )

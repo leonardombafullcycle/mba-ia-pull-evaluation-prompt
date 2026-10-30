@@ -1,0 +1,561 @@
+C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\src\utils.py:229: LangChainDeprecationWarning: The class `ChatOllama` was deprecated in LangChain 0.3.1 and will be removed in 1.0.0. An updated version of the class exists in the :class:`~langchain-ollama package and should be used instead. To use it run `pip install -U :class:`~langchain-ollama` and import as `from :class:`~langchain_ollama import ChatOllama``.
+  return ChatOllama(
+
+==================================================
+AVALIAÇÃO DE PROMPTS OTIMIZADOS
+==================================================
+
+Provider: ollama
+Modelo Principal: gpt-4o-mini
+Modelo de Avaliação: gpt-4o
+
+Provider local Ollama selecionado; nenhuma chave de LLM será exigida.
+Criando dataset de avaliação: mba-ia-pull-evaluation-prompt-eval...
+   ✓ Carregados 15 exemplos do arquivo datasets/bug_to_user_story.jsonl
+   ✓ Dataset 'mba-ia-pull-evaluation-prompt-eval' já existe, usando existente
+
+======================================================================
+PROMPTS PARA AVALIAR
+======================================================================
+
+Este script irá puxar prompts do LangSmith Hub.
+Certifique-se de ter feito push dos prompts antes de avaliar:
+  python src/push_prompts.py
+
+
+🔍 Avaliando: setup-handle/bug_to_user_story_v2
+   Puxando prompt do LangSmith Hub: setup-handle/bug_to_user_story_v2
+   ✓ Prompt carregado com sucesso
+   Dataset: 15 exemplos
+   Avaliando exemplos...
+      ⚠️  Erro ao avaliar exemplo: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+      Traceback: Traceback (most recent call last):
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\src\evaluate.py", line 158, in evaluate_prompt_on_example
+    response = chain.invoke(inputs)
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\runnables\base.py", line 3024, in invoke
+    input = context.run(step.invoke, input, config)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 286, in invoke
+    self.generate_prompt(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 786, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 643, in generate
+    raise e
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 633, in generate
+    self._generate_with_cache(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 851, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 291, in _generate
+    final_chunk = self._chat_stream_with_aggregation(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 222, in _chat_stream_with_aggregation
+    for stream_resp in self._create_chat_stream(messages, stop, **kwargs):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 194, in _create_chat_stream
+    yield from self._create_stream(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\llms\ollama.py", line 266, in _create_stream
+    raise OllamaEndpointNotFoundError(
+langchain_community.llms.ollama.OllamaEndpointNotFoundError: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+
+      ⚠️  Erro ao avaliar exemplo: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+      Traceback: Traceback (most recent call last):
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\src\evaluate.py", line 158, in evaluate_prompt_on_example
+    response = chain.invoke(inputs)
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\runnables\base.py", line 3024, in invoke
+    input = context.run(step.invoke, input, config)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 286, in invoke
+    self.generate_prompt(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 786, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 643, in generate
+    raise e
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 633, in generate
+    self._generate_with_cache(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 851, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 291, in _generate
+    final_chunk = self._chat_stream_with_aggregation(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 222, in _chat_stream_with_aggregation
+    for stream_resp in self._create_chat_stream(messages, stop, **kwargs):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 194, in _create_chat_stream
+    yield from self._create_stream(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\llms\ollama.py", line 266, in _create_stream
+    raise OllamaEndpointNotFoundError(
+langchain_community.llms.ollama.OllamaEndpointNotFoundError: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+
+      ⚠️  Erro ao avaliar exemplo: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+      Traceback: Traceback (most recent call last):
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\src\evaluate.py", line 158, in evaluate_prompt_on_example
+    response = chain.invoke(inputs)
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\runnables\base.py", line 3024, in invoke
+    input = context.run(step.invoke, input, config)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 286, in invoke
+    self.generate_prompt(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 786, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 643, in generate
+    raise e
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 633, in generate
+    self._generate_with_cache(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 851, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 291, in _generate
+    final_chunk = self._chat_stream_with_aggregation(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 222, in _chat_stream_with_aggregation
+    for stream_resp in self._create_chat_stream(messages, stop, **kwargs):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 194, in _create_chat_stream
+    yield from self._create_stream(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\llms\ollama.py", line 266, in _create_stream
+    raise OllamaEndpointNotFoundError(
+langchain_community.llms.ollama.OllamaEndpointNotFoundError: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+
+      ⚠️  Erro ao avaliar exemplo: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+      Traceback: Traceback (most recent call last):
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\src\evaluate.py", line 158, in evaluate_prompt_on_example
+    response = chain.invoke(inputs)
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\runnables\base.py", line 3024, in invoke
+    input = context.run(step.invoke, input, config)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 286, in invoke
+    self.generate_prompt(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 786, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 643, in generate
+    raise e
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 633, in generate
+    self._generate_with_cache(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 851, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 291, in _generate
+    final_chunk = self._chat_stream_with_aggregation(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 222, in _chat_stream_with_aggregation
+    for stream_resp in self._create_chat_stream(messages, stop, **kwargs):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 194, in _create_chat_stream
+    yield from self._create_stream(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\llms\ollama.py", line 266, in _create_stream
+    raise OllamaEndpointNotFoundError(
+langchain_community.llms.ollama.OllamaEndpointNotFoundError: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+
+      ⚠️  Erro ao avaliar exemplo: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+      Traceback: Traceback (most recent call last):
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\src\evaluate.py", line 158, in evaluate_prompt_on_example
+    response = chain.invoke(inputs)
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\runnables\base.py", line 3024, in invoke
+    input = context.run(step.invoke, input, config)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 286, in invoke
+    self.generate_prompt(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 786, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 643, in generate
+    raise e
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 633, in generate
+    self._generate_with_cache(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 851, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 291, in _generate
+    final_chunk = self._chat_stream_with_aggregation(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 222, in _chat_stream_with_aggregation
+    for stream_resp in self._create_chat_stream(messages, stop, **kwargs):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 194, in _create_chat_stream
+    yield from self._create_stream(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\llms\ollama.py", line 266, in _create_stream
+    raise OllamaEndpointNotFoundError(
+langchain_community.llms.ollama.OllamaEndpointNotFoundError: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+
+      ⚠️  Erro ao avaliar exemplo: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+      Traceback: Traceback (most recent call last):
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\src\evaluate.py", line 158, in evaluate_prompt_on_example
+    response = chain.invoke(inputs)
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\runnables\base.py", line 3024, in invoke
+    input = context.run(step.invoke, input, config)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 286, in invoke
+    self.generate_prompt(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 786, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 643, in generate
+    raise e
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 633, in generate
+    self._generate_with_cache(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 851, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 291, in _generate
+    final_chunk = self._chat_stream_with_aggregation(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 222, in _chat_stream_with_aggregation
+    for stream_resp in self._create_chat_stream(messages, stop, **kwargs):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 194, in _create_chat_stream
+    yield from self._create_stream(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\llms\ollama.py", line 266, in _create_stream
+    raise OllamaEndpointNotFoundError(
+langchain_community.llms.ollama.OllamaEndpointNotFoundError: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+
+      ⚠️  Erro ao avaliar exemplo: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+      Traceback: Traceback (most recent call last):
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\src\evaluate.py", line 158, in evaluate_prompt_on_example
+    response = chain.invoke(inputs)
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\runnables\base.py", line 3024, in invoke
+    input = context.run(step.invoke, input, config)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 286, in invoke
+    self.generate_prompt(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 786, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 643, in generate
+    raise e
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 633, in generate
+    self._generate_with_cache(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 851, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 291, in _generate
+    final_chunk = self._chat_stream_with_aggregation(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 222, in _chat_stream_with_aggregation
+    for stream_resp in self._create_chat_stream(messages, stop, **kwargs):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 194, in _create_chat_stream
+    yield from self._create_stream(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\llms\ollama.py", line 266, in _create_stream
+    raise OllamaEndpointNotFoundError(
+langchain_community.llms.ollama.OllamaEndpointNotFoundError: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+
+      ⚠️  Erro ao avaliar exemplo: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+      Traceback: Traceback (most recent call last):
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\src\evaluate.py", line 158, in evaluate_prompt_on_example
+    response = chain.invoke(inputs)
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\runnables\base.py", line 3024, in invoke
+    input = context.run(step.invoke, input, config)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 286, in invoke
+    self.generate_prompt(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 786, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 643, in generate
+    raise e
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 633, in generate
+    self._generate_with_cache(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 851, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 291, in _generate
+    final_chunk = self._chat_stream_with_aggregation(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 222, in _chat_stream_with_aggregation
+    for stream_resp in self._create_chat_stream(messages, stop, **kwargs):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 194, in _create_chat_stream
+    yield from self._create_stream(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\llms\ollama.py", line 266, in _create_stream
+    raise OllamaEndpointNotFoundError(
+langchain_community.llms.ollama.OllamaEndpointNotFoundError: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+
+      ⚠️  Erro ao avaliar exemplo: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+      Traceback: Traceback (most recent call last):
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\src\evaluate.py", line 158, in evaluate_prompt_on_example
+    response = chain.invoke(inputs)
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\runnables\base.py", line 3024, in invoke
+    input = context.run(step.invoke, input, config)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 286, in invoke
+    self.generate_prompt(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 786, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 643, in generate
+    raise e
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 633, in generate
+    self._generate_with_cache(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 851, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 291, in _generate
+    final_chunk = self._chat_stream_with_aggregation(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 222, in _chat_stream_with_aggregation
+    for stream_resp in self._create_chat_stream(messages, stop, **kwargs):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 194, in _create_chat_stream
+    yield from self._create_stream(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\llms\ollama.py", line 266, in _create_stream
+    raise OllamaEndpointNotFoundError(
+langchain_community.llms.ollama.OllamaEndpointNotFoundError: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+
+      ⚠️  Erro ao avaliar exemplo: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+      Traceback: Traceback (most recent call last):
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\src\evaluate.py", line 158, in evaluate_prompt_on_example
+    response = chain.invoke(inputs)
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\runnables\base.py", line 3024, in invoke
+    input = context.run(step.invoke, input, config)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 286, in invoke
+    self.generate_prompt(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 786, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 643, in generate
+    raise e
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 633, in generate
+    self._generate_with_cache(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 851, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 291, in _generate
+    final_chunk = self._chat_stream_with_aggregation(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 222, in _chat_stream_with_aggregation
+    for stream_resp in self._create_chat_stream(messages, stop, **kwargs):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 194, in _create_chat_stream
+    yield from self._create_stream(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\llms\ollama.py", line 266, in _create_stream
+    raise OllamaEndpointNotFoundError(
+langchain_community.llms.ollama.OllamaEndpointNotFoundError: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+
+      ⚠️  Erro ao avaliar exemplo: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+      Traceback: Traceback (most recent call last):
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\src\evaluate.py", line 158, in evaluate_prompt_on_example
+    response = chain.invoke(inputs)
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\runnables\base.py", line 3024, in invoke
+    input = context.run(step.invoke, input, config)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 286, in invoke
+    self.generate_prompt(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 786, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 643, in generate
+    raise e
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 633, in generate
+    self._generate_with_cache(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 851, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 291, in _generate
+    final_chunk = self._chat_stream_with_aggregation(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 222, in _chat_stream_with_aggregation
+    for stream_resp in self._create_chat_stream(messages, stop, **kwargs):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 194, in _create_chat_stream
+    yield from self._create_stream(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\llms\ollama.py", line 266, in _create_stream
+    raise OllamaEndpointNotFoundError(
+langchain_community.llms.ollama.OllamaEndpointNotFoundError: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+
+      ⚠️  Erro ao avaliar exemplo: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+      Traceback: Traceback (most recent call last):
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\src\evaluate.py", line 158, in evaluate_prompt_on_example
+    response = chain.invoke(inputs)
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\runnables\base.py", line 3024, in invoke
+    input = context.run(step.invoke, input, config)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 286, in invoke
+    self.generate_prompt(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 786, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 643, in generate
+    raise e
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 633, in generate
+    self._generate_with_cache(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 851, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 291, in _generate
+    final_chunk = self._chat_stream_with_aggregation(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 222, in _chat_stream_with_aggregation
+    for stream_resp in self._create_chat_stream(messages, stop, **kwargs):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 194, in _create_chat_stream
+    yield from self._create_stream(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\llms\ollama.py", line 266, in _create_stream
+    raise OllamaEndpointNotFoundError(
+langchain_community.llms.ollama.OllamaEndpointNotFoundError: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+
+      ⚠️  Erro ao avaliar exemplo: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+      Traceback: Traceback (most recent call last):
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\src\evaluate.py", line 158, in evaluate_prompt_on_example
+    response = chain.invoke(inputs)
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\runnables\base.py", line 3024, in invoke
+    input = context.run(step.invoke, input, config)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 286, in invoke
+    self.generate_prompt(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 786, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 643, in generate
+    raise e
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 633, in generate
+    self._generate_with_cache(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 851, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 291, in _generate
+    final_chunk = self._chat_stream_with_aggregation(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 222, in _chat_stream_with_aggregation
+    for stream_resp in self._create_chat_stream(messages, stop, **kwargs):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 194, in _create_chat_stream
+    yield from self._create_stream(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\llms\ollama.py", line 266, in _create_stream
+    raise OllamaEndpointNotFoundError(
+langchain_community.llms.ollama.OllamaEndpointNotFoundError: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+
+      ⚠️  Erro ao avaliar exemplo: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+      Traceback: Traceback (most recent call last):
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\src\evaluate.py", line 158, in evaluate_prompt_on_example
+    response = chain.invoke(inputs)
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\runnables\base.py", line 3024, in invoke
+    input = context.run(step.invoke, input, config)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 286, in invoke
+    self.generate_prompt(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 786, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 643, in generate
+    raise e
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 633, in generate
+    self._generate_with_cache(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 851, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 291, in _generate
+    final_chunk = self._chat_stream_with_aggregation(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 222, in _chat_stream_with_aggregation
+    for stream_resp in self._create_chat_stream(messages, stop, **kwargs):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 194, in _create_chat_stream
+    yield from self._create_stream(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\llms\ollama.py", line 266, in _create_stream
+    raise OllamaEndpointNotFoundError(
+langchain_community.llms.ollama.OllamaEndpointNotFoundError: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+
+      ⚠️  Erro ao avaliar exemplo: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+      Traceback: Traceback (most recent call last):
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\src\evaluate.py", line 158, in evaluate_prompt_on_example
+    response = chain.invoke(inputs)
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\runnables\base.py", line 3024, in invoke
+    input = context.run(step.invoke, input, config)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 286, in invoke
+    self.generate_prompt(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 786, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 643, in generate
+    raise e
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 633, in generate
+    self._generate_with_cache(
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 851, in _generate_with_cache
+    result = self._generate(
+             ^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 291, in _generate
+    final_chunk = self._chat_stream_with_aggregation(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 222, in _chat_stream_with_aggregation
+    for stream_resp in self._create_chat_stream(messages, stop, **kwargs):
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\chat_models\ollama.py", line 194, in _create_chat_stream
+    yield from self._create_stream(
+               ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\venv\Lib\site-packages\langchain_community\llms\ollama.py", line 266, in _create_stream
+    raise OllamaEndpointNotFoundError(
+langchain_community.llms.ollama.OllamaEndpointNotFoundError: Ollama call failed with status code 404. Maybe your model is not found and you should pull the model with `ollama pull gpt-4o-mini`.
+
+
+==================================================
+Prompt: setup-handle/bug_to_user_story_v2
+==================================================
+
+Métricas Derivadas:
+  - Helpfulness: 0.00 ✗
+  - Correctness: 0.00 ✗
+
+Métricas Base:
+  - F1-Score: 0.00 ✗
+  - Clarity: 0.00 ✗
+  - Precision: 0.00 ✗
+
+--------------------------------------------------
+📊 MÉDIA GERAL: 0.0000
+--------------------------------------------------
+
+❌ STATUS: REPROVADO
+⚠️  Métricas abaixo de 0.8: helpfulness, correctness, f1_score, clarity, precision
+⚠️  Média atual: 0.0000 | Necessário: 0.8000
+
+==================================================
+RESUMO FINAL
+==================================================
+
+Prompts avaliados: 1
+Aprovados: 0
+Reprovados: 1
+
+⚠️  Alguns prompts não atingiram todas as métricas >= 0.8
+
+Próximos passos:
+1. Refatore os prompts com score baixo
+2. Faça push novamente: python src/push_prompts.py
+3. Execute: python src/evaluate.py novamente

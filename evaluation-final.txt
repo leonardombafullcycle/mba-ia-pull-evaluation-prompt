@@ -1,0 +1,85 @@
+C:\Users\leonardo.rocha\OneDrive - Midas Solutions\MBA\mba-ia-pull-evaluation-prompt\src\utils.py:244: LangChainDeprecationWarning: The class `ChatOllama` was deprecated in LangChain 0.3.1 and will be removed in 1.0.0. An updated version of the class exists in the :class:`~langchain-ollama package and should be used instead. To use it run `pip install -U :class:`~langchain-ollama` and import as `from :class:`~langchain_ollama import ChatOllama``.
+  return ChatOllama(
+
+==================================================
+AVALIAÇÃO DE PROMPTS OTIMIZADOS
+==================================================
+
+Provider: ollama
+Modelo Principal: gemma4:e4b
+Modelo de Avaliação: gemma4:e4b
+
+Provider local Ollama selecionado; nenhuma chave de LLM será exigida.
+Criando dataset de avaliação: mba-ia-pull-evaluation-prompt-eval...
+   ✓ Carregados 15 exemplos do arquivo datasets/bug_to_user_story.jsonl
+   ✓ Dataset 'mba-ia-pull-evaluation-prompt-eval' já existe, usando existente
+
+======================================================================
+PROMPTS PARA AVALIAR
+======================================================================
+
+Este script irá puxar prompts do LangSmith Hub.
+Certifique-se de ter feito push dos prompts antes de avaliar:
+  python src/push_prompts.py
+
+
+🔍 Avaliando: setup-handle/bug_to_user_story_v2
+   Puxando prompt do LangSmith Hub: setup-handle/bug_to_user_story_v2
+   ✓ Prompt carregado com sucesso
+   Dataset: 15 exemplos
+   Avaliando exemplos...
+⚠️  Não foi possível extrair JSON da resposta: ...
+⚠️  Não foi possível extrair JSON da resposta: ...
+⚠️  Não foi possível extrair JSON da resposta: ...
+      [1/15] F1:0.00 Clarity:0.00 Precision:0.00
+      [2/15] F1:0.92 Clarity:0.93 Precision:0.93
+      [3/15] F1:0.72 Clarity:0.93 Precision:0.9#  7
+      [4/15] F1:0.53 Clarity:0.90 Precision:0.87
+      [5/15] F1:0.79 Clarity:0.68 Precision:0.87
+      [6/15] F1:0.95 Clarity:0.93 Precision:0.90
+      [7/15] F1:0.97 Clarity:0.96 Precision:1.00
+      [8/15] F1:0.85 Clarity:0.94 Precision:1.00
+      [9/15] F1:0.90 Clarity:0.90 Precision:0.90
+      [10/15] F1:0.80 Clarity:0.98 Precision:0.90
+      [11/15] F1:0.85 Clarity:1.00 Precision:0.73
+      [12/15] F1:1.00 Clarity:1.00 Precision:0.90
+      [13/15] F1:1.00 Clarity:0.98 Precision:0.83
+      [14/15] F1:0.89 Clarity:0.97 Precision:0.90
+      [15/15] F1:0.97 Clarity:1.00 Precision:0.77
+
+==================================================
+Prompt: setup-handle/bug_to_user_story_v2
+==================================================
+
+Métricas Derivadas:
+  - Helpfulness: 0.85 ✓
+  - Correctness: 0.82 ✓
+
+Métricas Base:
+  - F1-Score: 0.81 ✓
+  - Clarity: 0.87 ✓
+  - Precision: 0.83 ✓
+
+--------------------------------------------------
+📊 MÉDIA GERAL: 0.8374
+--------------------------------------------------
+
+✅ STATUS: APROVADO - Todas as métricas >= 0.8
+
+==================================================
+RESUMO FINAL
+==================================================
+
+Prompts avaliados: 1
+Aprovados: 1
+Reprovados: 0
+
+✅ Todos os prompts atingiram todas as métricas >= 0.8!
+
+✓ Confira os resultados em:
+  https://smith.langchain.com/projects/mba-ia-pull-evaluation-prompt
+
+Próximos passos:
+1. Documente o processo no README.md
+2. Capture screenshots das avaliações
+3. Faça commit e push para o GitHub
